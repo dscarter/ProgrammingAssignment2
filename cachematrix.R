@@ -12,7 +12,9 @@
 
 
 ## Write a short comment describing this function
-##	setMat sets the matrix and clears out the cached inv
+## makeCacheMatrix creates a list of functions to store
+## 	a matrix and a cached version of matrix inverse.
+##	setMat sets the matrix and clears out the cached inverse
 ##      getMat returns the cached matrix
 ##      setinvMat stores an inverse matrix
 ##      getinvMat returns the cached inverse
@@ -33,19 +35,22 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Write a short comment describing this function
-##      Checks to see if the inverse of a matrix has already been
+## CacheSolve checks to see if the inverse of a matrix has already been
 ##      solved.  If it has then it returns it.  If it has not then
-##      it calculates it.
+##      it calculates it and then stores it.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         MatrixInverse <- x$getinvMat()  #set the inverse from the cached matrix 
-        if(!is.null(MatrixInverse)) {   #if the cached inverse is not empty then return it
+
+        if(!is.null(MatrixInverse)) {   
+			#if the cached inverse is not empty then return it
                 message("getting cached data")
                 return(MatrixInverse)
         }
-        
-        MatrixInverse <- solve(x$getMat(),...)  #inverse was not calculated so do so now
+
+        #inverse was not calculated so do so now
+        MatrixInverse <- solve(x$getMat(),...)  
         x$setinvMat(MatrixInverse)
         MatrixInverse
 }
